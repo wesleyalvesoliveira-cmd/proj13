@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Dinâmico de Alturas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e2e;
+            color: #cdd6f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #252538;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+        }
+        h1 {
+            color: #cba6f7;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #a6adc8;
+            font-size: 14px;
+        }
+        input {
+            background-color: #1e1e2e;
+            border: 1px solid #45475a;
+            color: #cdd6f4;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #89b4fa;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            border: none;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex: 1;
+        }
+        .btn-add {
+            background-color: #a6e3a1;
+            color: #11111b;
+        }
+        .btn-add:hover {
+            background-color: #94e2d5;
+        }
+        .btn-finish {
+            background-color: #89b4fa;
+            color: #11111b;
+        }
+        .btn-finish:hover {
+            background-color: #b4befe;
+        }
+        .contador {
+            text-align: center;
+            font-size: 13px;
+            color: #f9e2af;
+            margin-top: 10px;
+        }
+        .resultado-box {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #11111b;
+            border-left: 4px solid #cba6f7;
+            border-radius: 4px;
+            display: none;
+        }
+        .resultado-box h2 {
+            font-size: 15px;
+            color: #cba6f7;
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .resultado-item {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            margin: 6px 0;
+            color: #cdd6f4;
+            border-bottom: 1px dashed #313244;
+            padding-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Cadastro de Pessoas</h1>
+        
+        <div class="form-group">
+            <label for="nome">Nome da pessoa:</label>
+            <input type="text" id="nome" placeholder="Ex: Maria Silva">
+        </div>
+        
+        <div class="form-group">
+            <label for="altura">Altura (ex: 1.75):</label>
+            <input type="number" id="altura" step="0.01" min="0" placeholder="Ex: 1.75">
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-add" onclick="adicionarPessoa()">Adicionar Pessoa</button>
+            <button class="btn-finish" onclick="mostrarRelatorio()">Finalizar e Listar</button>
+        </div>
+
+        <div class="contador" id="contadorPessoas">Nenhuma pessoa cadastrada ainda.</div>
+
+        <div class="resultado-box" id="painelResultado">
+            <h2>--- Pessoas Cadastradas ---</h2>
+            <div id="conteudoResultado"></div>
+        </div>
+    </div>
+
+    <script>
+        // Array global equivalente ao seu let listaPessoas = [];
+        let listaPessoas = [];
+
+        function adicionarPessoa() {
+            // Captura os elementos da tela
+            const inputNome = document.getElementById('nome');
+            const inputAltura = document.getElementById('altura');
+
+            let nome = inputNome.value.trim();
+            let altura = parseFloat(inputAltura.value);
+
+            // Validação idêntica ao seu: if (nome && !isNaN(altura))
+            if (nome && !isNaN(altura)) {
+                // listaPessoas.push({ nome: nome, altura: altura });
+                listaPessoas.push({ nome: nome, altura: altura });
+                
+                // Atualiza o contador na tela
+                document.getElementById('contadorPessoas').innerText = `${listaPessoas.length} pessoa(s) na lista.`;
+                
+                // Limpa os campos para a próxima digitação e foca no nome
+                inputNome.value = "";
+                inputAltura.value = "";
+                inputNome.focus();
+            } else {
+                // alert("Dados inválidos...")
+                alert("Dados inválidos. Esta entrada não foi computada.");
+            }
+        }
+
+        function mostrarRelatorio() {
+            const painel = document.getElementById('painelResultado');
+            const conteudo = document.getElementById('conteudoResultado');
+            
+            // Se a lista estiver vazia, avisa o usuário
+            if (listaPessoas.length === 0) {
+                alert("Adicione pelo menos uma pessoa antes de finalizar!");
+                return;
+            }
+
+            conteudo.innerHTML = ""; // Limpa listagens anteriores
+
+            // Equivalente ao seu: listaPessoas.forEach(p => { ... })
+            listaPessoas.forEach(p => {
+                conteudo.innerHTML += `
+                    <div class="resultado-item">
+                        <strong>${p.nome}</strong> tem ${p.altura.toFixed(2)}m de altura.
+                    </div>
+                `;
+            });
+
+            // Mostra a caixinha com o resultado
+            painel.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

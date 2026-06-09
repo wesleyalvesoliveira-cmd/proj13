@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Idades</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e2e;
+            color: #cdd6f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background-color: #252538;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 360px;
+        }
+        h1 {
+            color: #cba6f7;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        label {
+            color: #a6adc8;
+            font-size: 14px;
+        }
+        input {
+            background-color: #1e1e2e;
+            border: 1px solid #45475a;
+            color: #cdd6f4;
+            padding: 8px;
+            border-radius: 6px;
+            width: 80px;
+            text-align: center;
+            font-size: 14px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #89b4fa;
+        }
+        button {
+            background-color: #89b4fa;
+            color: #11111b;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            width: 100%;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #b4befe;
+        }
+        .resultado {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px dashed #45475a;
+            text-align: left;
+            display: none;
+        }
+        .resultado p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        .destaque {
+            color: #f9e2af;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Análise de Idades</h1>
+        
+        <div class="input-group">
+            <label>Idade da 1ª pessoa:</label>
+            <input type="number" id="idade1" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label>Idade da 2ª pessoa:</label>
+            <input type="number" id="idade2" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label>Idade da 3ª pessoa:</label>
+            <input type="number" id="idade3" min="0" value="0">
+        </div>
+        <div class="input-group">
+            <label>Idade da 4ª pessoa:</label>
+            <input type="number" id="idade4" min="0" value="0">
+        </div>
+
+        <button onclick="executarAnalise()">Verificar Maior Idade</button>
+
+        <div class="resultado" id="painelResultado">
+            <p><strong>Vetor completo:</strong> <span id="resVetor"></span></p>
+            <p><strong>Maior idade digitada:</strong> <span id="resMaior" class="destaque"></span></p>
+            <p><strong>Posição digitada:</strong> <span id="resPosicao"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function executarAnalise() {
+            // Captura os valores dos inputs exatamente como no seu vetor original
+            let idades = [
+                Number(document.getElementById('idade1').value),
+                Number(document.getElementById('idade2').value),
+                Number(document.getElementById('idade3').value),
+                Number(document.getElementById('idade4').value)
+            ];
+
+            // A mesma lógica exata do seu código original para achar o maior
+            let maiorIdade = idades[0];
+            let posicaoMaior = 0;
+
+            for (let i = 1; i < idades.length; i++) {
+                if (idades[i] > maiorIdade) {
+                    maiorIdade = idades[i];
+                    posicaoMaior = i;
+                }
+            }
+
+            // Injeta as respostas direto nas tags HTML da página
+            document.getElementById('resVetor').innerText = `[${idades.join(", ")}]`;
+            document.getElementById('resMaior').innerText = maiorIdade;
+            document.getElementById('resPosicao').innerText = `${posicaoMaior + 1}ª posição`;
+
+            // Torna o painel de resultados visível
+            document.getElementById('painelResultado').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>

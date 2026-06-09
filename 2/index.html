@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro e Filtro de Funcionários</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e2e;
+            color: #cdd6f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #252538;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            color: #cba6f7;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .funcionario-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+            background-color: #1e1e2e;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #45475a;
+        }
+        .num {
+            color: #f9e2af;
+            font-weight: bold;
+            min-width: 25px;
+        }
+        input {
+            background-color: #313244;
+            border: 1px solid #45475a;
+            color: #cdd6f4;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #89b4fa;
+        }
+        input.input-sexo {
+            text-transform: uppercase;
+            text-align: center;
+        }
+        button {
+            background-color: #89b4fa;
+            color: #11111b;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            width: 100%;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #b4befe;
+        }
+        .resultado-box {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #11111b;
+            border-left: 4px solid #a6e3a1;
+            border-radius: 4px;
+            display: none;
+        }
+        .resultado-box h2 {
+            font-size: 16px;
+            color: #a6e3a1;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .resultado-item {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            margin: 6px 0;
+            color: #a6adc8;
+        }
+        .resultado-item span {
+            color: #f38ba8;
+        }
+    </style>
+</head>
+<body>
